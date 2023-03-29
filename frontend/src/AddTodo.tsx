@@ -1,6 +1,7 @@
 import {FormEvent, useState} from "react";
 import {NewTodo} from "./Todo";
 import {Button, TextField} from "@mui/material";
+import {useNavigate} from "react-router-dom"
 
 type AddTodoProps = {
     addTodo: (newTodo: NewTodo) => void
@@ -10,7 +11,7 @@ type AddTodoProps = {
 export default function AddTodo(props: AddTodoProps) {
 
     const [description, setDescription] = useState<string>('')
-
+const navigate =useNavigate()
 
     function onSaveTodo(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -18,6 +19,7 @@ export default function AddTodo(props: AddTodoProps) {
         const newTodo: NewTodo = {description: description, status: 'OPEN'}
 
         props.addTodo(newTodo)
+        navigate("todos")
     }
 
     return (

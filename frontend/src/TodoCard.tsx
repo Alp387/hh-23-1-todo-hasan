@@ -1,6 +1,7 @@
 import './TodoCard.css'
 import {Todo} from "./Todo";
 import {Button, Typography} from "@mui/material";
+import{useNavigate} from "react-router-dom"
 
 type Props = {
     todo: Todo,
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export default function TodoCard(props: Props) {
+    const navigate = useNavigate()
 
     const nextStatus: {OPEN: "IN_PROGRESS", IN_PROGRESS: "DONE", DONE: "DONE"} = {
         "OPEN": "IN_PROGRESS",
@@ -35,6 +37,9 @@ export default function TodoCard(props: Props) {
             <Typography>{props.todo.description}</Typography>
             <Typography>{props.todo.status}</Typography>
             <Typography>{props.todo.id}</Typography>
+
+            <Button onClick={()=>{navigate("/todos/" +props.todo.id)}}>Details</Button>
+
             {props.todo.status !== 'DONE' && <Button onClick={onAdvanceClick}>Advance</Button>}
             {props.todo.status === 'DONE' && <Button onClick={onDeleteClick}>Delete</Button>}
 
